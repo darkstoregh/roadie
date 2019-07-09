@@ -5,10 +5,9 @@ import debug from 'debug';
 const log = debug('roadie');
 
 export default class FedExAPI {
-  constructor({ token }) {
+  constructor({ environment, token }) {
     this.request = axios.create({
-      baseURL:
-        process.env.NODE_ENV === 'production' ? 'https://connect.roadie.com' : 'https://connect-sandbox.roadie.com', // TODO: ensure production url is correct before go live
+      baseURL: environment === 'production' ? 'https://connect.roadie.com' : 'https://connect-sandbox.roadie.com', // TODO: ensure production url is correct before go live
       timeout: 3000,
       headers: {
         Authorization: `Bearer ${token}`,
