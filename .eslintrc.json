@@ -1,0 +1,13 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": 1,
+    "camelcase": 0,
+    "no-underscore-dangle": 0,
+    "class-methods-use-this": 1
+  },
+  "env": {
+    "node": true
+  }
+}

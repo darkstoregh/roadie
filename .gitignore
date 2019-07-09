@@ -1,0 +1,46 @@
+# Ignore environment variables, aws credentials, database config
+config.json
+.env
+.current-git-hash
+
+# Ignore all logfiles and tempfiles.
+*.log
+
+# Ignore node modules
+node_modules
+
+# Ignore npm logs
+npm-debug.log
+
+# Ignore bower components
+bower_components
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+test.js
+testprint.js
+
+# Local setup
+.DS_Store
+.idea
+.vscode
+.nvmrc
+
+
+data.sql
+
+# Generated whenever tests are run
+.nyc_output/
+coverage/
+
+# don't include exported CSV files
+tmp
+
+# Certificats
+certs
+
+tool/floyd_rates
+reports

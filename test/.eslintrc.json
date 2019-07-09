@@ -1,0 +1,13 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "camelcase": 0,
+    "no-underscore-dangle": 0,
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+  },
+  "env": {
+    "mocha": true
+  }
+}
