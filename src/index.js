@@ -1,5 +1,4 @@
 import axios from 'axios';
-import axiosDebugLogger from 'axios-debug-log';
 import debug from 'debug';
 
 const log = debug('roadie');
@@ -14,7 +13,6 @@ export default class FedExAPI {
         'Content-Type': 'application/json',
       },
     });
-    axiosDebugLogger.addLogger(this.request, log);
   }
 
   // eslint-disable-next-line class-methods-use-this

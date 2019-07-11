@@ -17,8 +17,6 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _axiosDebugLog = _interopRequireDefault(require("axios-debug-log"));
-
 var _debug = _interopRequireDefault(require("debug"));
 
 var log = (0, _debug["default"])('roadie');
@@ -39,8 +37,6 @@ function () {
         'Content-Type': 'application/json'
       }
     });
-
-    _axiosDebugLog["default"].addLogger(this.request, log);
   } // eslint-disable-next-line class-methods-use-this
 
 
