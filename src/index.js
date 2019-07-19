@@ -7,7 +7,6 @@ export default class Roadie {
   constructor({ environment, token }) {
     this.request = axios.create({
       baseURL: environment === 'production' ? 'https://connect.roadie.com' : 'https://connect-sandbox.roadie.com', // TODO: ensure production url is correct before go live
-      timeout: 3000,
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
