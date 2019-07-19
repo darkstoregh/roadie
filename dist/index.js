@@ -31,7 +31,6 @@ function () {
     this.request = _axios["default"].create({
       baseURL: environment === 'production' ? 'https://connect.roadie.com' : 'https://connect-sandbox.roadie.com',
       // TODO: ensure production url is correct before go live
-      timeout: 3000,
       headers: {
         Authorization: "Bearer ".concat(token),
         'Content-Type': 'application/json'
@@ -73,21 +72,27 @@ function () {
                 }, 'Roadie Error: '));
 
               case 6:
-                _context.next = 9;
+                _context.next = 15;
                 break;
 
               case 8:
-                if (err.request) {
-                  // The request was made but no response was received
-                  // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
-                  // http.ClientRequest in node.js
-                  log('Error: err.request: %o', err.request);
-                } else {
-                  // Something happened in setting up the request that triggered an err
-                  log('Error: %s', err.message);
+                if (!err.request) {
+                  _context.next = 13;
+                  break;
                 }
 
-              case 9:
+                // The request was made but no response was received
+                // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                log('Error: err.request: %o', err.request);
+                throw new Error("Roadie Error: request: ".concat(request.status));
+
+              case 13:
+                // Something happened in setting up the request that triggered an err
+                log('Error: %s', err.message);
+                throw new Error("Roadie Error: ".concat(err.message));
+
+              case 15:
               case "end":
                 return _context.stop();
             }
