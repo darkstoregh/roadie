@@ -21,13 +21,13 @@ var _debug = _interopRequireDefault(require("debug"));
 
 var log = (0, _debug["default"])('roadie');
 
-var FedExAPI =
+var Roadie =
 /*#__PURE__*/
 function () {
-  function FedExAPI(_ref) {
+  function Roadie(_ref) {
     var environment = _ref.environment,
         token = _ref.token;
-    (0, _classCallCheck2["default"])(this, FedExAPI);
+    (0, _classCallCheck2["default"])(this, Roadie);
     this.request = _axios["default"].create({
       baseURL: environment === 'production' ? 'https://connect.roadie.com' : 'https://connect-sandbox.roadie.com',
       // TODO: ensure production url is correct before go live
@@ -40,7 +40,7 @@ function () {
   } // eslint-disable-next-line class-methods-use-this
 
 
-  (0, _createClass2["default"])(FedExAPI, [{
+  (0, _createClass2["default"])(Roadie, [{
     key: "handleError",
     value: function () {
       var _handleError = (0, _asyncToGenerator2["default"])(
@@ -318,8 +318,8 @@ function () {
       }());
     }
   }]);
-  return FedExAPI;
+  return Roadie;
 }();
 
-exports["default"] = FedExAPI;
+exports["default"] = Roadie;
 //# sourceMappingURL=index.js.map
