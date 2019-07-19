@@ -1,6 +1,6 @@
 {
   "name": "roadie",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "node library to access the roadie web service api",
   "main": "dist/index.js",
   "husky": {

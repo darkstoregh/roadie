@@ -38,9 +38,11 @@ export default class Roadie {
       // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
       log('Error: err.request: %o', err.request);
+      throw new Error(`Roadie Error: request: ${request.status}`)
     } else {
       // Something happened in setting up the request that triggered an err
       log('Error: %s', err.message);
+      throw new Error(`Roadie Error: ${err.message}`)
     }
   }
 
