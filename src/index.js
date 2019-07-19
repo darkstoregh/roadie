@@ -38,11 +38,11 @@ export default class Roadie {
       // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
       log('Error: err.request: %o', err.request);
-      throw new Error(`Roadie Error: request: ${request.status}`)
+      throw new Error(`Roadie Error: request: ${err.request.status}`);
     } else {
       // Something happened in setting up the request that triggered an err
       log('Error: %s', err.message);
-      throw new Error(`Roadie Error: ${err.message}`)
+      throw new Error(`Roadie Error: ${err.message}`);
     }
   }
 
@@ -64,7 +64,7 @@ export default class Roadie {
     return this.request
       .post('/v1/shipments', params)
       .then(response => response.data)
-      .catch(async err => this.handleError(err));
+      .catch(err => this.handleError(err));
   }
 
   /**
@@ -75,7 +75,7 @@ export default class Roadie {
     return this.request
       .delete(`/v1/shipments/${id}`)
       .then(response => response.data)
-      .catch(async err => this.handleError(err));
+      .catch(err => this.handleError(err));
   }
 
   /**
@@ -94,7 +94,7 @@ export default class Roadie {
     return this.request
       .post('/v1/estimates', params)
       .then(response => response.data)
-      .catch(async err => this.handleError(err));
+      .catch(err => this.handleError(err));
   }
 
   /**
@@ -105,7 +105,7 @@ export default class Roadie {
     return this.request
       .get(`/v1/shipments/${id}`)
       .then(response => response.data)
-      .catch(async err => this.handleError(err));
+      .catch(err => this.handleError(err));
   }
 
   /**
@@ -129,6 +129,6 @@ export default class Roadie {
     return this.request
       .patch(`/v1/shipments/${id}`, params)
       .then(response => response.data)
-      .catch(async err => this.handleError(err));
+      .catch(err => this.handleError(err));
   }
 }

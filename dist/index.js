@@ -85,7 +85,7 @@ function () {
                 // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
                 // http.ClientRequest in node.js
                 log('Error: err.request: %o', err.request);
-                throw new Error("Roadie Error: request: ".concat(request.status));
+                throw new Error("Roadie Error: request: ".concat(err.request.status));
 
               case 13:
                 // Something happened in setting up the request that triggered an err
@@ -128,30 +128,9 @@ function () {
 
       return this.request.post('/v1/shipments', params).then(function (response) {
         return response.data;
-      })["catch"](
-      /*#__PURE__*/
-      function () {
-        var _ref2 = (0, _asyncToGenerator2["default"])(
-        /*#__PURE__*/
-        _regenerator["default"].mark(function _callee2(err) {
-          return _regenerator["default"].wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  return _context2.abrupt("return", _this.handleError(err));
-
-                case 1:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
-
-        return function (_x2) {
-          return _ref2.apply(this, arguments);
-        };
-      }());
+      })["catch"](function (err) {
+        return _this.handleError(err);
+      });
     }
     /**
      *
@@ -165,30 +144,9 @@ function () {
 
       return this.request["delete"]("/v1/shipments/".concat(id)).then(function (response) {
         return response.data;
-      })["catch"](
-      /*#__PURE__*/
-      function () {
-        var _ref3 = (0, _asyncToGenerator2["default"])(
-        /*#__PURE__*/
-        _regenerator["default"].mark(function _callee3(err) {
-          return _regenerator["default"].wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  return _context3.abrupt("return", _this2.handleError(err));
-
-                case 1:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3);
-        }));
-
-        return function (_x3) {
-          return _ref3.apply(this, arguments);
-        };
-      }());
+      })["catch"](function (err) {
+        return _this2.handleError(err);
+      });
     }
     /**
      *
@@ -210,30 +168,9 @@ function () {
 
       return this.request.post('/v1/estimates', params).then(function (response) {
         return response.data;
-      })["catch"](
-      /*#__PURE__*/
-      function () {
-        var _ref4 = (0, _asyncToGenerator2["default"])(
-        /*#__PURE__*/
-        _regenerator["default"].mark(function _callee4(err) {
-          return _regenerator["default"].wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  return _context4.abrupt("return", _this3.handleError(err));
-
-                case 1:
-                case "end":
-                  return _context4.stop();
-              }
-            }
-          }, _callee4);
-        }));
-
-        return function (_x4) {
-          return _ref4.apply(this, arguments);
-        };
-      }());
+      })["catch"](function (err) {
+        return _this3.handleError(err);
+      });
     }
     /**
      *
@@ -247,30 +184,9 @@ function () {
 
       return this.request.get("/v1/shipments/".concat(id)).then(function (response) {
         return response.data;
-      })["catch"](
-      /*#__PURE__*/
-      function () {
-        var _ref5 = (0, _asyncToGenerator2["default"])(
-        /*#__PURE__*/
-        _regenerator["default"].mark(function _callee5(err) {
-          return _regenerator["default"].wrap(function _callee5$(_context5) {
-            while (1) {
-              switch (_context5.prev = _context5.next) {
-                case 0:
-                  return _context5.abrupt("return", _this4.handleError(err));
-
-                case 1:
-                case "end":
-                  return _context5.stop();
-              }
-            }
-          }, _callee5);
-        }));
-
-        return function (_x5) {
-          return _ref5.apply(this, arguments);
-        };
-      }());
+      })["catch"](function (err) {
+        return _this4.handleError(err);
+      });
     }
     /**
      *
@@ -297,30 +213,9 @@ function () {
 
       return this.request.patch("/v1/shipments/".concat(id), params).then(function (response) {
         return response.data;
-      })["catch"](
-      /*#__PURE__*/
-      function () {
-        var _ref6 = (0, _asyncToGenerator2["default"])(
-        /*#__PURE__*/
-        _regenerator["default"].mark(function _callee6(err) {
-          return _regenerator["default"].wrap(function _callee6$(_context6) {
-            while (1) {
-              switch (_context6.prev = _context6.next) {
-                case 0:
-                  return _context6.abrupt("return", _this5.handleError(err));
-
-                case 1:
-                case "end":
-                  return _context6.stop();
-              }
-            }
-          }, _callee6);
-        }));
-
-        return function (_x6) {
-          return _ref6.apply(this, arguments);
-        };
-      }());
+      })["catch"](function (err) {
+        return _this5.handleError(err);
+      });
     }
   }]);
   return Roadie;
