@@ -1,0 +1,12 @@
+extends:
+  import: classic
+  file: javascript/pipeline.yaml
+
+pipelines:
+  release:
+    postBuild:
+      steps:
+        - sh: npm i -g semantic-release
+          name: install-semantic-release
+        - sh: semantic-release
+           name: semantic-release
