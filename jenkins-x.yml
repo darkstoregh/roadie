@@ -1,54 +1,10 @@
-buildPack: none
+buildPack: ../../jenkins-x-classic/packs/javascript
 pipelineConfig:
   pipelines:
-    pullRequest:
-      build:
-        steps:
-          - sh: export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml
-            name: container-build
+    release:
       postBuild:
         steps:
-          - sh: jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION
-            name: post-build
-      promote:
-        steps:
-          - dir: ./charts/preview
-            steps:
-              - sh: make preview
-                name: make-preview
-              - sh: jx preview --app $APP_NAME --dir ../..
-                name: jx-preview
-    release:
-      build:
-        steps:
-          - groovy: git 'https://REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME.git'
-            when: "prow"
-          - sh: git checkout master
-            comment: ensure we're not on a detached head
-            when: "!prow"
-          - sh: git config --global credential.helper store
-            when: "!prow"
-          - sh: jx step git credentials
-            when: "!prow"
-          - sh: export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml
-            name: container-build
-          - sh: jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)
-            name: post-build
-      promote:
-        steps:
-          - dir: ./charts/REPLACE_ME_APP_NAME
-            steps:
-              - sh: jx step changelog --batch-mode --version v\$(cat ../../VERSION)
-                name: changelog
-              - comment: release the helm chart
-                sh: jx step helm release
-                name: helm-release
-              - comment: promote through all 'Auto' promotion Environments
-                sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
-                name: jx-promote
-    post:
-      steps:
-        - groovy: always
-          when: "!prow"
-          steps:
-            - groovy: "cleanWs()"
+          - sh: npm i -g semantic-release
+            name: install-semantic-release
+          - sh: semantic-release
+            name: semantic-release
