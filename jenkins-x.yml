@@ -1,4 +1,4 @@
-buildPack: ../../jenkins-x-classic/javascript
+buildPack: ../../jenkins-x-classic/packs/javascript
 pipelineConfig:
   pipelines:
     release:
