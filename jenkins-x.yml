@@ -4,26 +4,51 @@ pipelineConfig:
     pullRequest:
       build:
         steps:
-          - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
-            name: npmrc
-          - sh: npm install
-            name: npm-install
-          - sh: CI=true DISPLAY=:99 npm test
-            name: npm-test
-    release:
-      setVersion:
+          - sh: export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml
+            name: container-build
+      postBuild:
         steps:
-          - sh: echo \$(jx-release-version) > VERSION
-            name: next-version
-            comment: so we can retrieve the version in later steps
-          # TODO modify package.json?
-          - sh: jx step tag --version \$(cat VERSION)
-            name: tag-version
+          - sh: jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION
+            name: post-build
+      promote:
+        steps:
+          - dir: ./charts/preview
+            steps:
+              - sh: make preview
+                name: make-preview
+              - sh: jx preview --app $APP_NAME --dir ../..
+                name: jx-preview
+    release:
       build:
         steps:
-          - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
-            name: npmrc
-          - sh: npm install
-            name: npm-install
-          - sh: CI=true DISPLAY=:99 npm test
-            name: npm-test
+          - groovy: git 'https://REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME.git'
+            when: "prow"
+          - sh: git checkout master
+            comment: ensure we're not on a detached head
+            when: "!prow"
+          - sh: git config --global credential.helper store
+            when: "!prow"
+          - sh: jx step git credentials
+            when: "!prow"
+          - sh: export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml
+            name: container-build
+          - sh: jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)
+            name: post-build
+      promote:
+        steps:
+          - dir: ./charts/REPLACE_ME_APP_NAME
+            steps:
+              - sh: jx step changelog --batch-mode --version v\$(cat ../../VERSION)
+                name: changelog
+              - comment: release the helm chart
+                sh: jx step helm release
+                name: helm-release
+              - comment: promote through all 'Auto' promotion Environments
+                sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
+                name: jx-promote
+    post:
+      steps:
+        - groovy: always
+          when: "!prow"
+          steps:
+            - groovy: "cleanWs()"
