@@ -4,12 +4,12 @@ pipelineConfig:
     pullRequest:
       setup:
         steps:
-          - sh: export ROADIE_TOKEN="$(jx step credential -s roadie -k token --optional false)
+          - sh: export ROADIE_TOKEN="$(jx step credential -s roadie -k token --optional false)"
             name: get-roadie-token
     release:
       setup:
         steps:
-          - sh: export ROADIE_TOKEN="$(jx step credential -s roadie -k token --optional false)
+          - sh: export ROADIE_TOKEN="$(jx step credential -s roadie -k token --optional false)"
             name: get-roadie-token
       postBuild:
         steps:
