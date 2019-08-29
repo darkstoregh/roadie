@@ -1,15 +1,12 @@
 buildPack: ../../jenkins-x-classic/packs/javascript
 pipelineConfig:
+  env:
+  - name: ROADIE_TOKEN
+    valueFrom:
+      secretKeyRef:
+        key: token
+        name: roadie
   pipelines:
-    pullRequest:
-      build:
-        steps:
-        - name: npm-test
-          sh: |
-            ROADIE_TOKEN=\"$(jx step credential -s roadie -k token --optional false)" \
-            CI=true \
-            DISPLAY=:99 \
-            npm test
     release:
       postBuild:
         steps:
