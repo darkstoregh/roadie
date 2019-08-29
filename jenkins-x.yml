@@ -6,6 +6,8 @@ pipelineConfig:
         steps:
           - sh: export ROADIE_TOKEN="$(jx step credential -s roadie -k token --optional false)"
             name: get-roadie-token
+          - sh: echo $ROADIE_TOKEN
+            name: debug-log
     release:
       setup:
         steps:
