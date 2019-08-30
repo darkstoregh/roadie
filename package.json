@@ -19,8 +19,7 @@
     "test-grep": "DEBUG=\"roadie*\" mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --grep",
     "test-grep-watch": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --watch --grep",
     "test-debug": "DEBUG=\"axios*,roadie*\" mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000",
-    "test-watch": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --watch",
-    "semantic-release": "semantic-release"
+    "test-watch": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --watch"
   },
   "author": "github@iammattwalters.com",
   "license": "ISC",
@@ -46,7 +45,6 @@
     "moment": "^2.24.0",
     "nyc": "^14.1.1",
     "prettier": "^1.17.1",
-    "semantic-release": "^15.13.24",
     "semantic-release-cli": "^5.2.0"
   },
   "dependencies": {

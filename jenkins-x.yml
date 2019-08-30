@@ -15,7 +15,7 @@ pipelineConfig:
     release:
       postBuild:
         steps:
-          - sh: npm i -g semantic-release
+          - sh: npm i -g temp-semantic-release-debug@15.13.5
             name: install-semantic-release
           - sh: npx semantic-release
             name: npx semantic-release
