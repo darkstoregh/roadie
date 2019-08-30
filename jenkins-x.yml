@@ -15,5 +15,7 @@ pipelineConfig:
     release:
       postBuild:
         steps:
+          - sh: git checkout master
+            name: master
           - sh: npm i -g temp-semantic-release-debug@15.13.5 && semantic-release --ci false
             name: semantic-release
