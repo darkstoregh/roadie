@@ -1,7 +1,5 @@
 # roadie
 
-## Notes
-
 ## Install
 
 ```

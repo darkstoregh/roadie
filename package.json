@@ -1,6 +1,6 @@
 {
   "name": "roadie",
-  "version": "1.0.9",
+  "version": "1.0.9-development",
   "description": "node library to access the roadie web service api",
   "main": "dist/index.js",
   "husky": {
@@ -13,12 +13,14 @@
     "build": "babel src --out-dir ./dist --source-maps",
     "lint:fix": "eslint --fix src test",
     "lint": "eslint src test",
+    "setup-semantic-release": "semantic-release-cli setup",
     "test": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000",
     "test-ci": "NODE_ENV=test nyc mocha --require @babel/register --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml --timeout 30000 --recursive",
     "test-grep": "DEBUG=\"roadie*\" mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --grep",
     "test-grep-watch": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --watch --grep",
     "test-debug": "DEBUG=\"axios*,roadie*\" mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000",
-    "test-watch": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --watch"
+    "test-watch": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000 --watch",
+    "semantic-release": "semantic-release"
   },
   "author": "github@iammattwalters.com",
   "license": "ISC",
@@ -43,7 +45,9 @@
     "mocha-junit-reporter": "^1.22.0",
     "moment": "^2.24.0",
     "nyc": "^14.1.1",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "semantic-release": "^15.13.24",
+    "semantic-release-cli": "^5.2.0"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -51,5 +55,12 @@
   },
   "files": [
     "/dist"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darkstoregh/roadie.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
 }
