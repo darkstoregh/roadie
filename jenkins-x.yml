@@ -1,11 +1,16 @@
 buildPack: ../../jenkins-x-classic/packs/javascript
 pipelineConfig:
   env:
-  - name: ROADIE_TOKEN
-    valueFrom:
-      secretKeyRef:
-        key: token
-        name: roadie
+    - name: GH_TOKEN
+      valueFrom:
+        secretKeyRef:
+          key: token
+          name: gh-token
+    - name: ROADIE_TOKEN
+      valueFrom:
+        secretKeyRef:
+          key: token
+          name: roadie
   pipelines:
     release:
       postBuild:
