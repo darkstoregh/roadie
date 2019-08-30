@@ -17,5 +17,5 @@ pipelineConfig:
         steps:
           - sh: npm i -g semantic-release
             name: install-semantic-release
-          - sh: semantic-release
+          - sh: npx semantic-release
             name: npx semantic-release
