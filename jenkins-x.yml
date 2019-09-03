@@ -26,11 +26,9 @@ pipelineConfig:
       setVersion:
         replace: true
         steps:
-          - sh: echo \$(jx step next-version --semantic-release) > VERSION
+          - sh: jx step next-version --semantic-release --filename package.json --tag
             name: next-version
             comment: so we can retrieve the version in later steps
-          - sh: jx step tag --version \$(cat VERSION)
-            name: tag-version
       build:
         replace: true
         steps:
@@ -42,9 +40,5 @@ pipelineConfig:
             name: npm-test
       postBuild:
         steps:
-          - sh: cat VERSION
-            name: print version
-          - sh: VERSION=`cat VERSION` sed -i "s/0.0.0-development/$VERSION/g" package.json
-            name: bump version
           - sh: npm publish
             name: npm publish
