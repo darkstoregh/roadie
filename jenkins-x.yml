@@ -1,4 +1,4 @@
-buildPack: ../../jenkins-x-classic/packs/javascript
+buildPack: none
 pipelineConfig:
   env:
     - name: GH_TOKEN
@@ -11,36 +11,86 @@ pipelineConfig:
         secretKeyRef:
           key: token
           name: roadie
+    - name: NPMRC
+      valueFrom:
+        secretKeyRef:
+          key: file
+          name: npm-token
   pipelines:
     pullRequest:
-      build:
-        replace: true
-        steps:
-          - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
-            name: npmrc
-          - sh: npm ci
-            name: npm-install
-          - sh: CI=true DISPLAY=:99 npm test
-            name: npm-test
+      pipeline:
+        options:
+          containerOptions:
+            resources:
+              limits:
+                cpu: 0.2
+                memory: 128Mi
+              requests:
+                cpu: 0.1
+                memory: 64Mi
+        agent:
+          image: node:8.14.1-stretch
+        stages:
+          - name: npm test
+            steps:
+              - sh: echo ${NPMRC} > /builder/home/.npmrc && cat /builder/home/.npmrc
+                name: npmrc
+              - sh: npm ci
+                name: npm-install
+              - sh: CI=true DISPLAY=:99 npm test
+                name: npm-test
+            options:
+              containerOptions:
+                resources:
+                  limits:
+                    cpu: 0.4
+                    memory: 256Mi
+                  requests:
+                    cpu: 0.2
+                    memory: 128Mi
     release:
-      setVersion:
-        replace: true
-        steps:
-          - sh: echo \$(jx-release-version) > VERSION
-            name: next-version
-            comment: so we can retrieve the version in later steps
-      build:
-        replace: true
-        steps:
-          - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
-            name: npmrc
-          - sh: npm ci
-            name: npm-install
-          - sh: CI=true DISPLAY=:99 npm test
-            name: npm-test
-      postBuild:
-        steps:
-          - sh: git checkout master
-            name: prevent-detached-head-for-semantic-release
-          - sh: npm i -g temp-semantic-release-debug@15.13.5 && semantic-release --ci false --debug
-            name: semantic-release
+      pipeline:
+        options:
+          containerOptions:
+            resources:
+              limits:
+                cpu: 0.2
+                memory: 128Mi
+              requests:
+                cpu: 0.1
+                memory: 64Mi
+        agent:
+          image: node:8.14.1-stretch
+        stages:
+          - name: npm test
+            steps:
+              - sh: echo ${NPMRC} > /builder/home/.npmrc && cat /builder/home/.npmrc
+                name: npmrc
+              - sh: npm ci
+                name: npm-install
+              - sh: CI=true DISPLAY=:99 npm test
+                name: npm-test
+            options:
+              containerOptions:
+                resources:
+                  limits:
+                    cpu: 0.4
+                    memory: 256Mi
+                  requests:
+                    cpu: 0.2
+                    memory: 128Mi
+          - name: semantic release
+            steps:
+              - sh: git checkout master
+                name: prevent-detached-head-for-semantic-release
+              - sh: npm i -g temp-semantic-release-debug@15.13.5 && semantic-release --ci false --debug
+                name: semantic-release
+            options:
+              containerOptions:
+                resources:
+                  limits:
+                    cpu: 0.4
+                    memory: 256Mi
+                  requests:
+                    cpu: 0.2
+                    memory: 128Mi
