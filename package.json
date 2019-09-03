@@ -1,6 +1,6 @@
 {
-  "name": "roadie",
-  "version": "1.0.9-development",
+  "name": "@darkstore/roadie",
+  "version": "0.0.0-development",
   "description": "node library to access the roadie web service api",
   "main": "dist/index.js",
   "husky": {
