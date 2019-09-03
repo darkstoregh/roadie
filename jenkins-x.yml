@@ -42,5 +42,9 @@ pipelineConfig:
             name: npm-test
       postBuild:
         steps:
-          - sh: npm publish --tag \$(cat VERSION)
+          - sh: cat VERSION
+            name: print version
+          - sh: VERSION=`cat VERSION` sed -i "s/0.0.0-development/$VERSION/g" package.json
+            name: bump version
+          - sh: npm publish
             name: npm publish
