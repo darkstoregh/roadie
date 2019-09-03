@@ -23,11 +23,13 @@ pipelineConfig:
           - sh: CI=true DISPLAY=:99 npm test
             name: npm-test
     release:
-      setVersion:
-        replace: true
-        steps:
-          - sh: echo 'no op'
-            name: no-op
+      # setVersion:
+      #   steps:
+      #     - sh: echo \$(jx-release-version) > VERSION
+      #       name: next-version
+      #       comment: so we can retrieve the version in later steps
+      #     - sh: jx step tag --version \$(cat VERSION)
+      #       name: tag-version
       build:
         replace: true
         steps:
