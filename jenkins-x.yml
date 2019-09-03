@@ -26,7 +26,7 @@ pipelineConfig:
       setVersion:
         replace: true
         steps:
-          - sh: jx step next-version --semantic-release > VERSION
+          - sh: echo \$(jx step next-version --semantic-release) > VERSION
             name: next-version
             comment: so we can retrieve the version in later steps
           - sh: jx step tag --version \$(cat VERSION)
