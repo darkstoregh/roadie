@@ -23,6 +23,11 @@ pipelineConfig:
           - sh: CI=true DISPLAY=:99 npm test
             name: npm-test
     release:
+      setVersion:
+        replace: true
+        steps:
+          - sh: echo 'no op'
+            name: no-op
       build:
         replace: true
         steps:
@@ -32,8 +37,7 @@ pipelineConfig:
             name: npm-install
           - sh: CI=true DISPLAY=:99 npm test
             name: npm-test
-      setVersion:
-        replace: true
+      postBuild:
         steps:
           - sh: git checkout master
             name: prevent-detached-head-for-semantic-release
