@@ -12,8 +12,28 @@ pipelineConfig:
           key: token
           name: roadie
   pipelines:
+    pullRequest:
+      build:
+        replace: true
+        steps:
+          - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+            name: npmrc
+          - sh: npm ci
+            name: npm-install
+          - sh: CI=true DISPLAY=:99 npm test
+            name: npm-test
     release:
-      postBuild:
+      build:
+        replace: true
+        steps:
+          - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+            name: npmrc
+          - sh: npm ci
+            name: npm-install
+          - sh: CI=true DISPLAY=:99 npm test
+            name: npm-test
+      setVersion:
+        replace: true
         steps:
           - sh: git checkout master
             name: prevent-detached-head-for-semantic-release
