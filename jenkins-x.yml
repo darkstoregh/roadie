@@ -33,7 +33,7 @@ pipelineConfig:
         stages:
           - name: npm test
             steps:
-              - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+              - sh: echo ${NPMRC} > /builder/home/.npmrc && cat /builder/home/.npmrc
                 name: npmrc
               - sh: npm ci
                 name: npm-install
