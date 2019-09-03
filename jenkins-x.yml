@@ -81,7 +81,7 @@ pipelineConfig:
                     memory: 128Mi
           - name: semantic release
             steps:
-              - sh: npm i -g temp-semantic-release-debug@15.13.5 && semantic-release --ci false --debug
+              - sh: git checkout master && git pull origin master && npm i -g temp-semantic-release-debug@15.13.5 && semantic-release --ci false --debug
                 name: semantic-release
             options:
               containerOptions:
