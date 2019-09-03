@@ -81,8 +81,6 @@ pipelineConfig:
                     memory: 128Mi
           - name: semantic release
             steps:
-              - sh: git checkout master
-                name: prevent-detached-head-for-semantic-release
               - sh: npm i -g temp-semantic-release-debug@15.13.5 && semantic-release --ci false --debug
                 name: semantic-release
             options:
