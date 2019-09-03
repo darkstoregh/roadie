@@ -59,6 +59,6 @@
     "url": "https://github.com/darkstoregh/roadie.git"
   },
   "publishConfig": {
-    "registry": "http://nexus-jx.104.198.21.14.nip.io/repository/npmjs-registry/"
+    "registry": "http://nexus-jx.104.198.21.14.nip.io/repository/npm-group/"
   }
 }
