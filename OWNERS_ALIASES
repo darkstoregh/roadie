@@ -1,7 +1,31 @@
 aliases:
   eng-approvers:
+  - alexanderDarkstore
+  - benbeltzer
+  - CalebOuellette
+  - chrisbolin
+  - david-dreyfus
+  - eugene-kim
+  - guptaso2
+  - johnculviner
+  - KennethKo
+  - Malvolio
   - mateodelnorte
   - patrickleet
+  - robertnowell
+  - zackgow
   eng-reviewers:
+  - alexanderDarkstore
+  - benbeltzer
+  - CalebOuellette
+  - chrisbolin
+  - david-dreyfus
+  - eugene-kim
+  - guptaso2
+  - johnculviner
+  - KennethKo
+  - Malvolio
   - mateodelnorte
   - patrickleet
+  - robertnowell
+  - zackgow
