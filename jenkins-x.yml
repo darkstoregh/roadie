@@ -41,4 +41,4 @@ pipelineConfig:
       postBuild:
         steps:
           - sh: npm publish
-            name: npm publish --tag \$(cat ../../VERSION)
+            name: npm run build && npm publish --tag \$(cat ../../VERSION)
