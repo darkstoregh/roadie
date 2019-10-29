@@ -1,5 +1,5 @@
 {
-  "name": "@darkstore/roadie",
+  "name": "@darkstoregh/roadie",
   "version": "0.0.0-development",
   "description": "node library to access the roadie web service api",
   "main": "dist/index.js",
@@ -13,6 +13,7 @@
     "build": "babel src --out-dir ./dist --source-maps",
     "lint:fix": "eslint --fix src test",
     "lint": "eslint src test",
+    "release": "npm run build && npm publish",
     "setup-semantic-release": "semantic-release-cli setup",
     "test": "mocha --require @babel/register --recursive \"test/**/*.js\" --timeout 5000",
     "test-ci": "NODE_ENV=test nyc mocha --require @babel/register --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml --timeout 30000 --recursive",
