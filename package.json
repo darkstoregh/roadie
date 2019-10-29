@@ -1,5 +1,5 @@
 {
-  "name": "@darkstore/roadie",
+  "name": "@darkstoregh/roadie",
   "version": "0.0.0-development",
   "description": "node library to access the roadie web service api",
   "main": "dist/index.js",
@@ -59,6 +59,6 @@
     "url": "https://github.com/darkstoregh/roadie.git"
   },
   "publishConfig": {
-    "registry": "http://nexus-jx.104.198.21.14.nip.io/repository/npm-hosted/"
+    "registry": "https://npm.pkg.github.com/darkstoregh"
   }
 }
