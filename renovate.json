@@ -1,5 +1,7 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base"],
+  "encrypted": {
+    "npmToken": "tC+swgqukhukZRe6MfGpqoguFLVE06tpF0R3r8xPhj8pEKxFQDyCYx0qmZLSH+f5CpDw4n17a2LCcEOWXTV7YS3figBXee1VRtkf4dDE2nqZ1FgOtEXkZ0shypCBBJnCISXKggqSlmahhGk/Hyh8H1Nll/maxkACbyl2MCbItcSaIIuqtjJU//RMqR+FkKcLzA+O/+hJWaek/UkBN59luxZIt7hUdISrEDPAx1tv6cHn75Nx0dLrMoV38IPIf1E1Vk6m1ph5RbNaS+RyurAXFzpm+7Ck3Bu7edvhmcL9HBZenNjiKF6olgiSqE1wgPQHbtAZFBZ1DprRapd2PW1pLA=="
+  },
+  "npmrc": "registry=https://registry.npmjs.org/\n@darkstoregh:registry=https://npm.pkg.github.com/darkstoregh\n//npm.pkg.github.com/darkstoregh/npm:_authToken=${NPM_TOKEN}"
 }
